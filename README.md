@@ -4,6 +4,8 @@ A local web viewer for your Claude Code data in `~/.claude`: sessions, memory, p
 
 It reads your real Claude Code files, which can contain private work. It binds to 127.0.0.1 only and never uploads anything.
 
+![claude-viewer screenshot with demo data](docs/screenshot.png)
+
 ## Features
 
 - Dashboard with live sessions, tokens and estimated cost today
