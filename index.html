@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>dot-claude-viewer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="/styles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/11.1.1/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+<div class="app">
+  <!-- ── Sidebar ── -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <div class="workspace-switcher">
+        <div class="logo-icon">C</div>
+        <div class="workspace-info">
+          <div class="logo-text">dot-claude</div>
+          <div class="logo-sub">viewer</div>
+        </div>
+        <span class="workspace-chevron">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </span>
+      </div>
+      <button class="search-trigger" id="search-open-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <span>Search</span>
+        <kbd>⌘K</kbd>
+      </button>
+    </div>
+    <div class="sidebar-scroll" id="sidebar-nav">
+      <!-- dynamically built -->
+    </div>
+    <div class="sidebar-footer">
+      <span>⌘K search</span>
+      <span>⌘R refresh</span>
+    </div>
+  </div>
+  <div class="sidebar-scrim" id="sidebar-scrim" onclick="App.closeSidebar()"></div>
+
+  <!-- ── Main ── -->
+  <div class="main">
+    <div class="topbar">
+      <button class="btn btn-icon sidebar-toggle" id="sidebar-toggle-btn" onclick="App.toggleSidebar()">☰</button>
+      <div class="breadcrumb" id="breadcrumb">
+        <span>~/.claude</span>
+      </div>
+      <div class="topbar-search" id="topbar-search-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <span>Search sessions, plans, memory…</span>
+      </div>
+      <div class="topbar-actions">
+        <button class="theme-toggle" id="theme-toggle" onclick="Theme.cycle()">◐</button>
+        <button class="btn btn-accent" onclick="App.refresh()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+          <span class="btn-label">Refresh</span>
+        </button>
+      </div>
+    </div>
+    <div class="content-area" id="content-area">
+      <div class="loading">Loading</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Search overlay ── -->
+<div class="search-overlay" id="search-overlay">
+  <div class="search-panel">
+    <div class="search-input-row">
+      <span class="icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
+      <input class="search-input" id="search-input" placeholder="Search sessions, memory, plans, CLAUDE.md…" autocomplete="off">
+      <span class="search-hint">Esc</span>
+    </div>
+    <div class="search-results" id="search-results"></div>
+    <div class="search-took" id="search-took"></div>
+  </div>
+</div>
+
+<script type="module" src="/js/app.js"></script>
+</body>
+</html>
